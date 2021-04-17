@@ -4,7 +4,7 @@ from rooms.models import Amenity
 
 class Command(BaseCommand):
 
-    help = "Making seed Amenities"
+    help = "This command creates amenities"
 
     # def add_arguments(self, parser):
     #     parser.add_argument(

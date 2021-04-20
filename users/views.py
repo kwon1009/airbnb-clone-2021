@@ -8,7 +8,7 @@ class LoginView(View):
     """ Login View Definition """
 
     def get(self, request):
-        form = forms.LoginForm(initial={"email": "test@test"})
+        form = forms.LoginForm(initial={"email": "test@test.com"})
         return render(
             request,
             "users/login.html",
@@ -19,10 +19,8 @@ class LoginView(View):
 
     def post(self, request):
         form = forms.LoginForm(request.POST)
-
         if form.is_valid():
             print(form.cleaned_data)
-
         return render(
             request,
             "users/login.html",

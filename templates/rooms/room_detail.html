@@ -35,5 +35,11 @@
         <li>{{h}}</li>
     {% endfor %}
     </ul>
+
+    <div class="w-1/3">
+        {% if room.host == user %}
+            <a href="{% url 'rooms:edit' room.pk %}">Edit Room</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}

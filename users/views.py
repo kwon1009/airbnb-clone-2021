@@ -7,10 +7,11 @@ from django.shortcuts import redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.base import ContentFile
 from django.contrib import messages
-from . import forms, models
+from django.contrib.messages.views import SuccessMessageMixin
+from . import forms, models, mixins
 
 
-class LoginView(FormView):
+class LoginView(mixins.LoggedOutOnlyView, FormView):
 
     """ Login View Definition """
 
@@ -33,7 +34,7 @@ def log_out(request):
     return redirect(reverse("core:home"))
 
 
-class SignUpView(FormView):
+class SignUpView(mixins.LoggedOutOnlyView, FormView):
 
     """ Sign up View Definition """
 
@@ -207,14 +208,16 @@ def kakao_callback(request):
         return redirect(reverse("users:login"))
 
 
-class UserProfileView(DetailView):
+class UserProfileView(mixins.LoggedOutOnlyView, DetailView):
     model = models.User
     context_object_name = "user_obj"
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(SuccessMessageMixin, UpdateView):
     model = models.User
     template_name = "users/update-profile.html"
+    success_message = "Profile Updated"
+
     fields = (
         "first_name",
         "last_name",
@@ -242,9 +245,10 @@ class UpdateProfileView(UpdateView):
         return form
 
 
-class UpdatePasswordView(PasswordChangeView):
+class UpdatePasswordView(SuccessMessageMixin, PasswordChangeView):
 
     template_name = "users/update-password.html"
+    success_message = "Password Update"
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class=form_class)
@@ -254,3 +258,6 @@ class UpdatePasswordView(PasswordChangeView):
             "placeholder": "Confirm New Password"
         }
         return form
+
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()

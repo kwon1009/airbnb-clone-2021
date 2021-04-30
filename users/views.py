@@ -214,7 +214,7 @@ def kakao_callback(request):
         return redirect(reverse("users:login"))
 
 
-class UserProfileView(mixins.LoggedOutOnlyView, DetailView):
+class UserProfileView(mixins.LoggedInOnlyView, DetailView):
     model = models.User
     context_object_name = "user_obj"
 

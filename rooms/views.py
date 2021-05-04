@@ -12,7 +12,7 @@ from . import models, forms
 # Class Based View
 class HomeView(ListView):
 
-    """ Home View Definition """
+    """Home View Definition"""
 
     model = models.Room
     paginate_by = 12
@@ -39,14 +39,14 @@ def room_detail(request, pk):
 # Class Based View - room detail
 class RoomDetail(DetailView):
 
-    """ Room Detail Definition """
+    """Room Detail Definition"""
 
     model = models.Room
 
 
 class SearchView(View):
 
-    """ Search View Definition """
+    """Search View Definition"""
 
     def get(self, request):
 
@@ -137,7 +137,7 @@ class SearchView(View):
 
 class EditRoomView(user_mixins.LoggedInOnlyView, UpdateView):
 
-    """ Room Edit View Definition """
+    """Room Edit View Definition"""
 
     model = models.Room
     template_name = "rooms/room_edit.html"
@@ -170,7 +170,7 @@ class EditRoomView(user_mixins.LoggedInOnlyView, UpdateView):
 
 class RoomPhotosView(user_mixins.LoggedInOnlyView, DetailView):
 
-    """ Room's Photos Edit View Definition """
+    """Room's Photos Edit View Definition"""
 
     model = models.Room
     template_name = "rooms/room_photos.html"

@@ -4,6 +4,7 @@ from django.views.generic import View
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
 from rooms import models as room_models
+from reviews import forms as review_forms
 from . import models
 
 
@@ -40,10 +41,14 @@ class ReservationDetailView(View):
         ):
             raise Http404()
 
+        form = review_forms.CreateReviewForm()
         return render(
             self.request,
             "reservations/detail.html",
-            {"reservation": reservation},
+            {
+                "reservation": reservation,
+                "form": form,
+            },
         )
 
 

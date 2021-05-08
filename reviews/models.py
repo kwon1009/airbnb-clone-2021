@@ -4,7 +4,7 @@ from core import models as core_models
 
 class Review(core_models.TimeStampedModel):
 
-    """ Review Model Definition """
+    """Review Model Definition"""
 
     review = models.TextField()
     accuracy = models.IntegerField()
@@ -35,3 +35,6 @@ class Review(core_models.TimeStampedModel):
         return round(avg, 2)
 
     rating_average.short_description = "Avg."
+
+    class Meta:
+        ordering = ("-created",)

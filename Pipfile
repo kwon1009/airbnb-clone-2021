@@ -10,10 +10,12 @@ django-countries = "*"
 django-seed = "*"
 django-dotenv = "*"
 requests = "*"
+pathspec = "*"
 
 [dev-packages]
 black = "*"
 flake8 = "*"
+awsebcli = "*"
 
 [requires]
 python_version = "3.8"
